@@ -6,7 +6,9 @@ const collegeSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
+        lowercase:true,
+        match:/^[a-z]*$/
     },
     fullName: {
         type: String,
@@ -23,7 +25,6 @@ const collegeSchema = new mongoose.Schema({
         type: Boolean,
         dafault:false
     },
-    interests:String
     
 },
     { timestamps: true });

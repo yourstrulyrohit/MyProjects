@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
 const app = express();
-const dotenv = require("dotenv")
-dotenv.config({ path:"./config.env" })
+// const dotenv = require("dotenv")
+// dotenv.config({ path:"./config.env" })
 const defaultPORT = process.env.PORT
 const DB = process.env.DATABASE;
 

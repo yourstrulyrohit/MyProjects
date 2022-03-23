@@ -1,5 +1,7 @@
 
 
+
+
 const collegeModel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
 
@@ -14,6 +16,12 @@ const createCollege = async function (req, res) {
         let {name, fullName, logoLink, isDeleted } = req.body
 
         // validation //
+
+        if(Object.keys(req.body).length==0) res.status(400).send({status:false, msg:"Bad request"})
+        if(!(/^[a-z]*$/.test(data.name))){
+            return res.status(400).send({status:false,msg:"invalid name"})
+         }
+
         if(!name) res.status(400).send({status:false, msg:"name is required"})
         if(!fullName) res.status(400).send({status:false, msg:"fullName is required"})
         if(!logoLink) res.status(400).send({status:false, msg:"logoLink is required"})
@@ -45,7 +53,10 @@ const getCollegeDetails = async function(req, res){
         
 
         let collegeName = req.query.collegeName
-        
+        // validation//
+        if(Object.keys(req.query.collegeName).length==0) res.status(400).send({status:false, msg:"Bad request"})
+
+
         if(!collegeName)  res.status(400).send({status:false,msg:"collegeName required"})
 
         let college = await collegeModel.findOne({name:collegeName,isDeleted : false})
@@ -78,6 +89,8 @@ const getCollegeDetails = async function(req, res){
 
 
 
-module.exports.createCollage = createCollege
+module.exports.createCollege = createCollege
 module.exports.getCollegeDetails = getCollegeDetails
+
+  
 

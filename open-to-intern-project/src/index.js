@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb+srv://rohankesarkar:rohan123@cluster0.sgev7.mongodb.net/openToInterns", {
+mongoose.connect("mongodb+srv://yourstrulyrohit:rohit123@cluster0.6iuya.mongodb.net/Group65Database?authSource=admin&replicaSet=atlas-w5j1a7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true", {
     useNewUrlParser: true
 })
     .then(() => console.log("MongoDb is connected"))

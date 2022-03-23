@@ -1,4 +1,5 @@
 
+
 const internModel = require("../models/internModel")
 
 
@@ -12,6 +13,8 @@ const createIntern = async function (req, res) {
 let{name, email, mobile, collegeId} = req.body
 
 // validation //
+if(Object.keys(req.body).length==0) res.status(400).send({status:false, msg:"Bad request"})
+
 if(!name) res.status(400).send({status:false, msg:"name is required"})
 
 if(!email) res.status(400).send({status:false, msg:"email is required"})

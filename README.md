@@ -1,5 +1,3 @@
-cd# Thorium
-
 ## Project - Books Management
 
 ### Key points

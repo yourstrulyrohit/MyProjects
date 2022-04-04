@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const booksModel = require("../models/booksModel");
 
+// AUTHENTICATE--------------
 const authentication = async function (req, res, next) {
     try {
         let token = req.headers["group19"];
@@ -15,6 +16,7 @@ const authentication = async function (req, res, next) {
     }
 }
 
+// AUTHORIZATION-----------
 let authorization = async function (req, res, next) {
     try {
         let token = req.headers["group19"];

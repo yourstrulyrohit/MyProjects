@@ -8,7 +8,7 @@ const reviewModel = require("../models/reviewModel")
 let createBook = async function (req, res) {
     try {
         const data = req.body;
-
+// validations
         if (!validator.isValid(data.title)) { return res.status(400).send({ status: false, message: "title Is Required" }) }
         if (!validator.isValid(data.excerpt)) { return res.status(400).send({ status: false, message: "Excerpt Is Requird" }) }
         if (!validator.isValid(data.userId)) { return res.status(400).send({ status: false, message: "User Id required!" }) }
@@ -17,7 +17,7 @@ let createBook = async function (req, res) {
         if (!validator.isValid(data.subcategory)) { return res.status(400).send({ status: false, message: "Subcategory Is Required" }) }
 
         if (!(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/.test(data.userId.trim()))) { return res.status(400).send({ status: false, message: "You should have put correct User Id" }) }
-
+// duplicacy
         const duplicteTitle = await booksModel.findOne({ title: data.title })
         if (duplicteTitle) { return res.status(404).send({ status: false, message: "title already exists, title must be unique" }) }
         const duplicateISBN = await booksModel.findOne({ ISBN: data.ISBN })
@@ -54,7 +54,7 @@ let getBook = async function (req, res) {
 
 
 
-// GET BOOK WITH REVIEW BY ID---------------------------
+// GET BOOK BY BOOK ID---------------------------
 
 const getBooksById = async function (req, res) {
     try {
@@ -94,7 +94,7 @@ const updateBooks = async function (req, res) {
 
         let book = await booksModel.findById(bookId)
         if (!book) { return res.status(400).send({ status: false, msg: "No book find with this id, Check your id." }) }
-
+// duplicacy
         let dataDup = await booksModel.findOne({ title: data.title })
         if (dataDup) { return res.status(400).send({ status: false, msg: "title cannot be duplicate" }) }
 
@@ -114,7 +114,7 @@ const updateBooks = async function (req, res) {
 
 
 
-// DELETE BOOK----------------------------------------
+// DELETE BOOK BY PARAMS----------------------------------------
 
 let deleteBook = async function (req, res) {
     try {

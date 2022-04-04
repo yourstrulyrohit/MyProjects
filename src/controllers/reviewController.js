@@ -5,7 +5,7 @@ const validator = require("../validator/validator")
 
 //CREATE REVIEW----------------------------------------
 
-const createReview = async (req, res) => {
+const createReview = async function (req, res) {
     try {
         if (!(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/.test(req.params.bookId))) { return res.status(400).send({ status: false, message: "You should have put correct book Id in params" }) }
         let data = req.body;
@@ -31,7 +31,7 @@ const createReview = async (req, res) => {
 }
 
 
-//UPDATE REVIEW----------------------------------------
+//UPDATE REVIEW BY BOOK ID AND REVIEW ID----------------------------------------
 
 const updateReviews = async (req, res) => {
     try {
@@ -40,7 +40,7 @@ const updateReviews = async (req, res) => {
         if (!(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/.test(bookId))) { return res.status(400).send({ status: false, message: "You should have put correct book Id in params" }) }
         if (!(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/.test(reviewId))) { return res.status(400).send({ status: false, message: "You should have put correct review Id in params" }) }
         let data = req.body;
-        if (!data) { return res.status(400).send({ status: false, message: "Enter some data for update" }) }
+        if(Object.keys(data)==0){return res.status(400).send({status: false, message: "Enter some data for update"})}
         if (!(data.rating >= 1 && data.rating <= 5)) { return res.status(400).send({ status: false, message: "Rating value should be between 1 to 5" }) }
 
         let book = await booksModel.findOne({ _id: bookId, isDeleted: false })
@@ -70,7 +70,7 @@ const updateReviews = async (req, res) => {
 }
 
 
-//DELETE REVIEW----------------------------------------
+//DELETE REVIEW BY REVIEW ID AND BOOK ID----------------------------------------
 
 const deleteReview = async (req, res) => {
     try {
@@ -84,7 +84,7 @@ const deleteReview = async (req, res) => {
 
         let review = await reviewModel.findOne({ _id: reviewId, bookId: bookId });
         if (!review) { return res.status(400).send({ status: false, msg: "Review id should be checked, id is not from this book." }) }
-        if (review.isDeleted == true) { return res.status(400).send({ status: false, msg: "Reviwe has already been deleted" }) }
+        if (review.isDeleted == true) { return res.status(400).send({ status: false, msg: "Review has already been deleted" }) }
 
         let deleteRev = await reviewModel.findOneAndUpdate({ _id: review._id, bookId: review.bookId, isDeleted: false },
             { $set: { isDeleted: true } })

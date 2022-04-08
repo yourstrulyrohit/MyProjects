@@ -46,25 +46,35 @@ const shortenUrl = async (req, res) => {
         
 
         let isUrlExist = await urlModel.findOne({ longUrl });
+
+
         if (isUrlExist) {
-            return res.status(200).send({ status: true, Message: "Success", url: isUrlExist });
+            const cahcedUrlData = await GET_ASYNC(`${longUrl}`)
+            return res.status(201).send({ status: true, Message: "Success", url: cahcedUrlData });
         }
     //   generation of base url with urlcode and creating data
         const shortUrl = baseUrl + "/" + urlCode;
+
         shortUrl.toLowerCase();
+
         const urlData = {
             longUrl,
             shortUrl,
             urlCode,
         };
+
+    
+
         let newUrl = await urlModel.create(urlData);
-        return res.status(201).send({ status: true, Message: "success", url: newUrl });
+        await SET_ASYNC(`${longUrl}`, JSON.stringify(urlData))
+        return res.status(201).send({ status: true, Message: "success", url: urlData });
         
 
     } catch (error) {
         res.status(500).send({ status: false, Err: error.message });
     }
 };
+
 
 
 //redirectToOriginalUrl....................................................................

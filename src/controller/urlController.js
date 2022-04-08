@@ -80,46 +80,9 @@ const shortenUrl = async (req, res) => {
 //redirectToOriginalUrl....................................................................
 
 const getUrl = async (req, res) => {
-// try {
-//     const urlCode = req.params.urlCode.trim();
-
-
-    // if (Object.entries(urlCode)== 0||(urlCode)==null) {
-    //     return res.status(400).send({ status: false, Message: "BAD REQUEST" });
-    // }
-
-    // const isUrlExist = await urlModel.findOne({ urlCode:req.params.urlCode.trim() });
-
-    // if (isUrlExist) {
-    //     if (urlCodes !== isUrlExist.urlCode) {
-    //     return res.status(404).send({ status: false, Message: "No Url Found, Please Check Url Code",});
-    //     }
-    //     return res.status(302).redirect(isUrlExist.longUrl);
-    // }
-//         let getUrlCode= await GET_ASYNC(`${req.params.urlCode}`)
-//         // if(!getUrlCode){res.send({msg:"enter valid url code"})}
-
-
-//         if(getUrlCode){
-//             res.send(getUrlCode)
-//             console.log(getUrlCode)
-//             // if(!getUrlCode){res.send({msg:"enter valid url code"})}
-//         }else{
-//             let seturlCode=await urlModel.findOne({urlCode:urlCode})
-//             await SET_ASYNC((`${req.params.urlCode}`),JSON.stringify(seturlCode))
-//             res.send({data:seturlCode})
-// console.log(seturlCode)
-//     } 
-// } catch (error) {
-//     res.status(500).send({ status: false, Message: error.message });
-// }
-// };
 try {
     const urlCode = req.params.urlCode
 
-    // if (!validUrl.isUri(urlCode)) {
-    //     return res.status(400).send({ status: false, message: "please provide urlcode" })
-    // }
     if(!urlCode){
     if (typeof value == undefined || value == null || value == 0) return false
     if (typeof value === 'string' && value.trim().length === 0) return false
@@ -148,7 +111,6 @@ try {
     return res.status(500).send({ status: false, message: err.message })
 }
 }
-// module.exports.cachedCode=cachedCode
 module.exports.shortenUrl = shortenUrl;
 
 module.exports.getUrl = getUrl;

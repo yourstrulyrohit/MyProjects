@@ -1,6 +1,6 @@
 # project-productsManagementGroup27
 #Thorium
-# GroupMembers: 1.Khusboo Babil 2.Sapna Dhakshiya 3.Chandan Das 4.Rohit Kumar
+# GroupMembers: 1.Rohit Kumar 2.Sapna Dhakshiya 3.Chandan Das 4.Khusboo Babil
 
 ## Project - Products Management
 

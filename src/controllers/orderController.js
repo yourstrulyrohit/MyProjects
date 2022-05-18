@@ -28,12 +28,7 @@ const createOrder = async(req, res) => {
 
         //validation for request body
         if (!isValidRequestBody(requestBody)) {
-            return res
-                .status(400)
-                .send({
-                    status: false,
-                    message: "Invalid request body. Please provide the the input to proceed.",
-                });
+            return res.status(400).send({status: false,message: "Invalid request body. Please provide the the input to proceed.",});
         }
         //Extract parameters
         const { cartId, cancellable, status } = requestBody;
